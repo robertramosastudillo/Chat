@@ -10,10 +10,24 @@ function render(data){
             <div class="message">
                 <strong>${message.nickname}</strong> dice:
                 <p>${message.text}</p>
-            </di>
+            </div>
         `);
     }).join(' ');
 
-    document.getElementById('messages').innerHTML = html;
+    let divMessages =document.getElementById('messages')
+    divMessages.innerHTML = html;
+    divMessages.scrollTop = divMessages.scrollHeight;
+}
+
+function addMessage(e){
+    var message = {
+        nickname: document.getElementById('nickname').value,
+        text: document.getElementById('text').value
+    };
+
+    document.getElementById('nickname').style.display = 'none';
+    socket.emit('add-message', message);
+
+    return false;
 }
 
